@@ -1,0 +1,88 @@
+@extends('templates.template')
+
+@section('content')
+    <header>
+        <div class="main text-center">
+          <h1 class="">Bem vindo ao seu gerenciador de tarefas</h1>
+            <a href="{{url('tasks/create')}}">
+              <div class="button">
+                <button type="button" class="btn btn-color-primary text-center">Cadastrar</button>
+          </div>
+          </a> 
+        </div> 
+    </header>
+    <div class="container">
+        <div class="title-form">
+            <h3 class="color-primary">Listagens de tasks</h3>
+        </div>
+            <form class="row g-3 mt-5">
+                <div class="col-12">
+                  <label for="inputEmail4" class="form-label">Número</label>
+                  <input type="number" class="form-control" id="">
+                </div>
+                <div class="col-12">
+                    <label for="inputEmail4" class="form-label">Título/Descrição</label>
+                    <input type="text" class="form-control" id="">
+                  </div>
+                <div class="col-4">
+                    <label for="inputState" class="form-label">Responsável</label>
+                    <select class="form-select  form-select-lg mb-3" aria-label=".form-select-lg example">
+                        <option selected>Selecionar responsável</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                </div>
+                <div class="col-4">
+                  <label for="inputState" class="form-label">Prioridade</label>
+                  <select id="inputState" class="form-select">
+                    <option selected>Escolher</option>
+                    <option>Baixa</option>
+                    <option value="">Média</option>
+                    <option value="">Alta</option>
+                  </select>
+                </div>
+                <div class=" col-4 search">
+                  <a href="">
+                    <button type="button" class="btn btn-color-primary text-center">Buscar</button>
+                  </a>
+                </div>  
+              </form>
+              <!--área da tabela-->
+              <table class="table text-center">
+                <thead class="col-table">
+                  <tr>
+                    <th scope="col">Número</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Responsável</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach ($task as $tasks)
+                    @php
+                        $user = $tasks->find($tasks->id)->relUsers;
+                    @endphp
+                    <tr>
+                        <th scope="row">{{$tasks->id}}</th>
+                        <td>{{$tasks->title}}</td>
+                        <td>{{$user->name}}</td>
+                        <td>
+                            <a href="">
+                                <button class="btn btn-color-primary">Editar</button>
+                            </a>
+                            <a href="">
+                                <button class="btn btn-danger">Excluir</button>
+                            </a>
+                            <a href="">
+                                <button class="btn btn-success">Concluir</button>
+                            </a>
+                        </td>
+                      </tr>
+                    @endforeach
+                  
+                </tbody>
+              </table>
+        </div>
+        
+@endsection
