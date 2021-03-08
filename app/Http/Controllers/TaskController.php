@@ -149,7 +149,7 @@ class TaskController extends Controller
                         ->Where('title', '=', $request->search)
                         ->get();//dd($posts);
        
-        return view('search', compact('posts', 'filters', 'users', 'task'));
+        return view('search', compact( 'filters', 'users', 'task'));
     }
     
 
